@@ -36,6 +36,7 @@ table = dynamodb.Table("rekognitionObjectDet-{}".format(os.environ["Env"]))
 ts = torch.jit.load('./doubleit_model.pt')
 
 def lambda_handler(event, context):
+    print(event)
     # Example or inference. This model returns a 1-dim tensor multiplied by 2
     sample_tensor = torch.tensor([1, 2, 3, 4])
     result = ts(sample_tensor)

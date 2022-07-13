@@ -33,7 +33,7 @@ jobs:
         run: |
           pip install pytest
           pip install pytest-cov
-          pytest tests.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+          pytest tests/unit/test_handler.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
 
   build-deploy:
     runs-on: ubuntu-latest
