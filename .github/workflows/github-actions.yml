@@ -23,7 +23,22 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-
+  unit tests:
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Test with pytest
+        run: |
+          pip install pytest
+          pip install pytest-cov
+          pytest tests.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
 
   build-deploy:
     runs-on: ubuntu-latest
@@ -39,7 +54,7 @@ jobs:
       # sam build 
       - run: sam build --use-container
 
-# Run Unit tests- Specify unit tests here 
+      # Run Unit tests- Specify unit tests here 
 
-# sam deploy
+      # sam deploy
       - run: sam deploy --config-env dev --no-confirm-changeset --no-fail-on-empty-changeset 
