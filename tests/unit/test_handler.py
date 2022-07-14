@@ -1,7 +1,8 @@
 import pytest
-#import json
 import os
 from function  import inference
+#import json
+
 @pytest.fixture()
 def test_lambda_handler():
     ret = inference.lambda_handler("","")
