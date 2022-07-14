@@ -31,6 +31,10 @@ Resources:
       Tags:
           - Key: "env"
             Value: !Ref Env
+      KmsMasterKeyId:
+        Fn::GetAtt:
+          - TestKey
+          - KeyId
   DeadLetterFifoQueue: 
     Type: AWS::SQS::Queue
     Properties: 
@@ -40,6 +44,10 @@ Resources:
       Tags:
           - Key: "env"
             Value: !Ref Env
+      KmsMasterKeyId:
+        Fn::GetAtt:
+          - TestKey
+          - KeyId
 
   AsyncQueue:
     Type: AWS::SQS::Queue
@@ -53,6 +61,10 @@ Resources:
       Tags:
         - Key: "env"
           Value: !Ref Env
+      KmsMasterKeyId:
+        Fn::GetAtt:
+          - TestKey
+          - KeyId
 
   FifoQueue:
     Type: AWS::SQS::Queue
@@ -65,6 +77,10 @@ Resources:
       Tags:
         - Key: "env"
           Value: !Ref Env
+      KmsMasterKeyId:
+        Fn::GetAtt:
+          - TestKey
+          - KeyId
 
   ModelFunction:
     Type: AWS::Serverless::Function
@@ -116,11 +132,40 @@ Resources:
         - Key: "env"
           Value: !Ref Env
 
+  InvocationAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Invocation alarm for my AWS Lambda
+      AlarmActions:
+        - !Ref InvocationAlarmSNSTopic
+      Namespace: AWS/Lambda
+      MetricName: Invocations
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref ModelFunction
+      Statistic: Sum
+      ComparisonOperator: LessThanThreshold
+      Threshold: 1
+      EvaluationPeriods: 1
+      Period: 86400
+      TreatMissingData: breaching
+      
+
+  InvocationAlarmSNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: "add valid email address"
+          Protocol: email
+      KmsMasterKeyId:
+        Fn::GetAtt:
+          - TestKey
+          - KeyId
 Outputs:  
   DeadLetterQueue:
     Description: DeadLetterStandardQueue
     Value: !Ref DeadLetterStandardQueue
-  DeadLetterQueue:
+  DeadLetterQueueFIO:
     Description: DeadLetterFifoQueue
     Value: !Ref DeadLetterFifoQueue
   AsyncQueue:
