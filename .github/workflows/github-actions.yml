@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "$PWD"
           python3 -m pip install pytest
-          python3 -m pip install -r functtion/requirements.txt
+          python3 -m pip install -r mlops-main/functtion/requirements.txt
           python3 -m pip install pytest-cov
           pytest tests/unit/test_handler.py --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml --cov-report=html
 
