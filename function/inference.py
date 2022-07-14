@@ -17,10 +17,10 @@ def lambda_handler(event, context):
     sample_tensor = torch.tensor([1, 2, 3, 4])
     result = ts(sample_tensor)
     print(round(uuid.uuid4().int, 10))
-"""
-    response = table.put_item(
-        Item={"id": int,
-              "result": result.tolist()}
-)"""
+    """
+        response = table.put_item(
+            Item={"id": int,
+                "result": result.tolist()}
+    )"""
     
     print(result)  # <- tensor([2, 4, 6, 8])
