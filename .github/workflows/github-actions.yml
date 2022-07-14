@@ -42,11 +42,11 @@ jobs:
           python3 -m pip install flake8
           python3 -m pip install -r ./function/requirements.txt
           python3 -m pip install pytest-cov
-          pytest tests/unit/test_handler.py --doctest-modules --junitxml=junit/test-results.xml --cov=coverage.txt --cov-report=term-missing:skip-covered
       - name: Pytest coverage comment
         uses: MishaKav/pytest-coverage-comment@main
+        run: pytest tests/unit/test_handler.py --doctest-modules --junitxml=junit/test-results.xml --cov=coverage.txt --cov-report=term-missing:skip-covered
         with:
-          pytest-coverage-path: coverage.txt
+          pytest-coverage-path: ./coverage.txt
           junitxml-path: ./junit/test-results.xml
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
