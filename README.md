@@ -14,26 +14,10 @@ If you want to explain any aspect of your code/implementation please feel free a
 
 Mandatory Requirements:
 
-1. Containerization (Docker, LXC...)
-2. Unit Tests
-2. CI/CD (GitLab, Github, Jenkins, Travis...)
-3. IaC (CDK, Terraform, Ansible...)
-4. Documentation (At least in functional/productive code)
-
-Optional requirements:
-
-- If you want, you can use python package managers such as pipenv, poetry or virtualenv
-- Suppose that the model inference call comes from backend, so you can choose either synchronous or asynchronoun communication
-- You can use a sentry-like application monitoring (Alarms in AWS Cloudwatch...)
-- Persistent data is optional, if you want to save the model events/results in a database
-
-PRUEBA IÑAKI GOROSTIAG:
-Mandatory Requirements:
-
-1. Containerization (Docker,ECR (Elastic Container Registry) )
-2. Unit Tests
-2. CI/CD (GitLab, Github, Jenkins, Travis...)
-3. IaC (CDK, Terraform, Ansible...)
+1. Containerization (Docker, LXC...) (Docker,ECR (Elastic Container Registry) )
+2. Unit Tests  (tests(unit/* , ci/cd pipelines using github actions))
+2. CI/CD (GitLab, Github, Jenkins, Travis...) (Githubg, github-actions, sonarcloud)
+3. IaC (CDK, Terraform, Ansible...) (Cloudformation)
 4. Documentation (At least in functional/productive code)
 
 Optional requirements:
