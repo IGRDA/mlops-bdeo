@@ -33,11 +33,12 @@ jobs:
         run: |
           python3 -m pip install pytest
           python3 -m pip install pytest-cov
-          python3 -m pip install pytorch
+          python3 -m pip install torch
           pytest tests/unit/test_handler.py --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml --cov-report=html
 
   build-deploy:
     runs-on: ubuntu-latest
+    needs: unit-tests
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
