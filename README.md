@@ -26,3 +26,11 @@ Optional requirements:
 - Suppose that the model inference call comes from backend, so you can choose either synchronous or asynchronoun communication
 - You can use a sentry-like application monitoring (Alarms in AWS Cloudwatch...)
 - Persistent data is optional, if you want to save the model events/results in a database
+
+
+
+
+Add dvc
+Block pushes to repo
+Integration tests con mocks
+Externalizar bucket, cuenta
