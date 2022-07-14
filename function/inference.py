@@ -1,14 +1,13 @@
 import os
 import torch
 import uuid
-from boto3 import resource as boto3_resource
-#a
+from boto3 import resource
 
 
 if os.environ.get("Env") is None:
     os.environ["Env"] = "dev"
 
-dynamodb = boto3_resource('dynamodb', "eu-west-3")
+dynamodb = resource('dynamodb', "eu-west-3")
 table = dynamodb.Table("rekognitionObjectDet-{}".format(os.environ["Env"]))
 ts = torch.jit.load('function/doubleit_model.pt')
 
