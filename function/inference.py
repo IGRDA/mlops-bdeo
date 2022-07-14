@@ -31,7 +31,7 @@ import os
 import uuid
 from boto3 import resource as boto3_resource
 
-if environ.get("Env") is None:
+if os.environ.get("Env") is None:
     os.environ["Env"] = "dev"
 
 dynamodb = boto3_resource('dynamodb',"eu-west-3")
