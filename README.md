@@ -30,7 +30,14 @@ Optional requirements:
 
 
 
-Add dvc
+Add dvc (data version control), mlflow (reproducibilty) tensorflow exended data drift concept drift, tensorboard, explainability, model dashboard againts control grous
+Ab testing
 Block pushes to repo
 Integration tests con mocks
 Externalizar bucket, cuenta
+
+Mejorar pytest y añadir distintos casos
+Cloudwatch dashboard
+
+Limpiar codigo y repo
+quitar acount id

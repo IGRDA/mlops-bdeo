@@ -116,6 +116,30 @@ Resources:
         - Key: "env"
           Value: !Ref Env
 
+  InvocationAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Invocation alarm for my AWS Lambda
+      AlarmActions:
+        - !Ref InvocationAlarmSNSTopic
+      Namespace: AWS/Lambda
+      MetricName: Invocations
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref ModelFunction
+      Statistic: Sum
+      ComparisonOperator: LessThanThreshold
+      Threshold: 1
+      EvaluationPeriods: 1
+      Period: 86400
+      TreatMissingData: breaching
+
+  InvocationAlarmSNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: "add valid email address"
+          Protocol: email
 Outputs:  
   DeadLetterQueue:
     Description: DeadLetterStandardQueue
