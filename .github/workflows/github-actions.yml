@@ -37,6 +37,12 @@ jobs:
           python3 -m pip install -r ./function/requirements.txt
           python3 -m pip install pytest-cov
           pytest tests/unit/test_handler.py --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml --cov-report=html
+      - name: run-tests
+        uses: dima-engineer/pytest-reporter@v1.0.1
+        with:
+          cov-omit-list: tests/unit/*
+          cov-threshold-single: 85
+          cov-threshold-total: 90
 
   build-deploy:
     runs-on: ubuntu-latest
