@@ -155,7 +155,7 @@ Resources:
     Type: AWS::SNS::Topic
     Properties:
       Subscription:
-        - Endpoint: "add valid email address"
+        - Endpoint: "innaki.gorostiaga@gmail.com"
           Protocol: email
       KmsMasterKeyId:
         Fn::GetAtt:

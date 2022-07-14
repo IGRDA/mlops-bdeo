@@ -1,6 +1,6 @@
 import os
-import torch
 import uuid
+import torch
 from boto3 import resource
 
 
