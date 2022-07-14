@@ -32,4 +32,5 @@ Optional requirements:
 
 Add dvc
 Block pushes to repo
-Integration tests
+Integration tests con mocks
+Externalizar bucket, cuenta
