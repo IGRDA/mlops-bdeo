@@ -140,11 +140,15 @@ Resources:
       Subscription:
         - Endpoint: "add valid email address"
           Protocol: email
+      KmsMasterKeyId:
+        Fn::GetAtt:
+          - TestKey
+          - KeyId
 Outputs:  
   DeadLetterQueue:
     Description: DeadLetterStandardQueue
     Value: !Ref DeadLetterStandardQueue
-  DeadLetterQueue:
+  DeadLetterQueueFIO:
     Description: DeadLetterFifoQueue
     Value: !Ref DeadLetterFifoQueue
   AsyncQueue:
