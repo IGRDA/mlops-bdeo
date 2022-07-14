@@ -27,9 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Python
-        - uses: actions/setup-python@v4
-        - uses: actions/checkout@v3
-        - uses: aws-actions/configure-aws-credentials@v1
+      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v3
+      - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -44,11 +44,11 @@ jobs:
           python3 -m pip install pytest-cov
           pytest tests/unit/test_handler.py --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml --cov-report=html
       - name: Pytest coverage comment
-        - uses: MishaKav/pytest-coverage-comment@main
-          with:
-            pytest-coverage-path: ./coverage.xml
-            junitxml-path: ./junit/test-results.xml
-            github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: ./coverage.xml
+          junitxml-path: ./junit/test-results.xml
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
   build-deploy:
     runs-on: ubuntu-latest
