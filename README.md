@@ -41,3 +41,5 @@ Cloudwatch dashboard
 
 Limpiar codigo y repo
 quitar acount id
+solve signed commits
+
