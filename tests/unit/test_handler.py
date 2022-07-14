@@ -1,7 +1,7 @@
 import pytest
 import json
 import os
-os.environ["Env"] = "unit"
+os.environ["Env"] = "dev"
 from function  import inference
 
 
