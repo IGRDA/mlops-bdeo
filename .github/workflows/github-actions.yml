@@ -48,10 +48,11 @@ jobs:
         with:
           pytest-coverage-path: ./coverage.xml
           junitxml-path: ./junit/test-results.xml
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
   build-deploy:
     runs-on: ubuntu-latest
-    needs: unit-testsx
+    needs: unit-tests
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
