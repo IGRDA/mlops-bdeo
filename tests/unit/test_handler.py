@@ -3,7 +3,7 @@ import os
 from function  import inference
 #import json
 
-os.environ["Env"] = "dev"
+
 #@pytest.fixture()
 def test_lambda_handler():
     ret = inference.lambda_handler("","")
