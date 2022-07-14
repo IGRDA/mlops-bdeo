@@ -1,5 +1,6 @@
-import torch
+
 import os
+import torch
 import uuid
 from boto3 import resource as boto3_resource
 
@@ -22,5 +23,4 @@ def lambda_handler(event, context):
             Item={"id": int,
                 "result": result.tolist()}
     )"""
-    
     print(result)  # <- tensor([2, 4, 6, 8])
