@@ -1,4 +1,4 @@
-name: Build
+name: coverage
 on:
   push:
     branches:
@@ -12,15 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-      - name: Setup Python
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python }}
-      - name: Install tox and any other packages
-        run: pip install tox
-      - name: Run tox
-        run: tox -e py
+          python-version: "3.9"
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+      - name: Install
+        run: make dev-install
+      - name: Unit Tests
+        run: make test
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
