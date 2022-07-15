@@ -16,7 +16,8 @@ Parameters:
 
   DashboardName:
     Description: "The CloudWatch dashboard name."
-    Type: "String"
+    Type: String
+    Default: BdeoDashboard
 Globals:
   Function:
     Timeout: 30
