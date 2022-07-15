@@ -2,10 +2,10 @@ import os
 import uuid
 import torch
 import boto3
-#import json
+# import json
 
 
-#@pytest.fixture()
+# @pytest.fixture()
 if os.environ.get("Env") is None:
     os.environ["Env"] = "dev"
 
@@ -22,7 +22,7 @@ def lambda_handler(event, context):
     print(round(uuid.uuid4().int, 10))
     """
         response = table.put_item(
-            Item={"id": int,
-                "result": result.tolist()}
+            Item={"id": round(uuid.uuid4().int, 10),
+                "result": str(result.tolist())}
     )"""
     print(result)  # <- tensor([2, 4, 6, 8])
