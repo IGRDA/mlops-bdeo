@@ -1,13 +1,13 @@
 import os
 import uuid
+import boto3
 import torch
-from boto3 import resource
 
 
 if os.environ.get("Env") is None:
     os.environ["Env"] = "dev"
 
-dynamodb = resource('dynamodb', "eu-west-3")
+dynamodb = boto3.resource('dynamodb', "eu-west-3")
 table = dynamodb.Table("rekognitionObjectDet-{}".format(os.environ["Env"]))
 ts = torch.jit.load('function/doubleit_model.pt')
 
@@ -20,7 +20,7 @@ def lambda_handler(event, context):
     print(round(uuid.uuid4().int, 10))
     """
         response = table.put_item(
-            Item={"id": int,
-                "result": result.tolist()}
+            Item={"id": round(uuid.uuid4().int, 10),
+                "result": str(result.tolist())}
     )"""
     print(result)  # <- tensor([2, 4, 6, 8])
