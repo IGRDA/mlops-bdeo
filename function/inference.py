@@ -3,7 +3,6 @@ import uuid
 import torch
 from boto3 import resource
 
-
 if os.environ.get("Env") is None:
     os.environ["Env"] = "dev"
 
