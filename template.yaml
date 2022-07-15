@@ -186,8 +186,62 @@ Resources:
         Type: "AWS::CloudWatch::Dashboard"
         Properties:
             DashboardName: !Ref DashboardName
-            DashboardBody: !Sub |
-                DASHBOARD_BODY
+            DashboardBody: 
+            type: object
+            example: |
+              {
+                  "widgets": [
+                      {
+                          "type": "explorer",
+                          "x": 0,
+                          "y": 0,
+                          "width": 24,
+                          "height": 15,
+                          "properties": {
+                              "metrics": [
+                                  {
+                                      "metricName": "Invocations",
+                                      "resourceType": "AWS::Lambda::Function",
+                                      "stat": "Sum"
+                                  },
+                                  {
+                                      "metricName": "Duration",
+                                      "resourceType": "AWS::Lambda::Function",
+                                      "stat": "Average"
+                                  },
+                                  {
+                                      "metricName": "Errors",
+                                      "resourceType": "AWS::Lambda::Function",
+                                      "stat": "Sum"
+                                  },
+                                  {
+                                      "metricName": "Throttles",
+                                      "resourceType": "AWS::Lambda::Function",
+                                      "stat": "Sum"
+                                  }
+                              ],
+                              "labels": [
+                                  {
+                                      "key": "FunctionName",
+                                      "value": "inferencceFunction-dev"
+                                  }
+                              ],
+                              "widgetOptions": {
+                                  "legend": {
+                                      "position": "bottom"
+                                  },
+                                  "view": "timeSeries",
+                                  "stacked": false,
+                                  "rowsPerPage": 50,
+                                  "widgetsPerRow": 2
+                              },
+                              "period": 3600,
+                              "splitBy": "",
+                              "region": "eu-west-3"
+                          }
+                      }
+                  ]
+              }
 Outputs:
   Dashboard:
     Description: "Dashboard created to monitor Lambda function"
