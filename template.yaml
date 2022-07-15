@@ -124,7 +124,7 @@ Resources:
     Properties:
       AlarmDescription: Invocation alarm for my AWS Lambda
       AlarmActions:
-        - !Ref InvocationAlarmSNSTopic
+        - !Ref AlarmSNSTopic
       Namespace: AWS/Lambda
       MetricName: Invocations
       Dimensions:
@@ -132,13 +132,46 @@ Resources:
           Value: !Ref ModelFunction
       Statistic: Sum
       ComparisonOperator: LessThanThreshold
-      Threshold: 1
-      EvaluationPeriods: 1
-      Period: 86400
-      TreatMissingData: breaching
-      
+      Threshold: 5
+      EvaluationPeriods: 1 #More for  consecutive metrics (moving averages)
+      Period: 86400 # 1 day
 
-  InvocationAlarmSNSTopic:
+  BillingAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Billing alarm for my AWS Lambda
+      AlarmActions:
+        - !Ref AlarmSNSTopic
+      Namespace: AWS/Lambda
+      MetricName: Billing
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref ModelFunction
+      Statistic: Sum
+      ComparisonOperator: GreaterThanThreshold
+      Threshold: 0.1
+      EvaluationPeriods: 1 
+      Period: 86400 
+
+  ErrorAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Billing alarm for my AWS Lambda
+      AlarmActions:
+        - !Ref AlarmSNSTopic
+      Namespace: AWS/Lambda
+      MetricName: Error
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref ModelFunction
+      Statistic: Sum
+      ComparisonOperator: GreaterThanThreshold
+      Threshold: 10
+      EvaluationPeriods: 1
+      Period: 86400 
+     
+
+  AlarmSNSTopic:
     Type: AWS::SNS::Topic
     Properties:
       Subscription:
