@@ -24,4 +24,3 @@ def lambda_handler(event, context):
                 "result": result.tolist()}
     )"""
     print(result)  # <- tensor([2, 4, 6, 8])
-    print("a")
