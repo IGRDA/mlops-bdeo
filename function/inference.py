@@ -2,8 +2,10 @@ import os
 import uuid
 import torch
 import boto3
+#import json
 
 
+#@pytest.fixture()
 if os.environ.get("Env") is None:
     os.environ["Env"] = "dev"
 
