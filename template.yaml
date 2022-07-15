@@ -14,6 +14,9 @@ Parameters:
       - prod
     Default: dev
 
+  DashboardName:
+    Description: "The CloudWatch dashboard name."
+    Type: "String"
 Globals:
   Function:
     Timeout: 30
@@ -178,7 +181,17 @@ Resources:
         - Endpoint: "innaki.gorostiaga@gmail.com"
           Protocol: email
 
-Outputs:  
+  Dashboard:
+        Type: "AWS::CloudWatch::Dashboard"
+        Properties:
+            DashboardName: !Ref DashboardName
+            DashboardBody: !Sub |
+                DASHBOARD_BODY
+Outputs:
+  Dashboard:
+    Description: "Dashboard created to monitor Lambda function"
+    Value: !Sub |
+       "https://${AWS::Region}.console.aws.amazon.com/cloudwatch/home#dashboards:name=${DashboardName}"
   DeadLetterQueue:
     Description: DeadLetterStandardQueue
     Value: !Ref DeadLetterStandardQueue
