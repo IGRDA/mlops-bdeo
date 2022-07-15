@@ -33,8 +33,6 @@ jobs:
           aws-region: eu-west-3
       - name: Test with pytest
         run: |
-          echo "$PWD"
-          echo "$(ls)"
           python3 -m pip install pytest
           python3 -m pip install flake8
           python3 -m pip install -r ./function/requirements.txt
@@ -43,19 +41,8 @@ jobs:
       - name: Pytest coverage comment
         uses: MishaKav/pytest-coverage-comment@main
         with:
-          pytest-coverage-path: ./coverage.txt
+          pytest-coverage-path: coverage.txt
           junitxml-path: ./junit/test-results.xml
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update Readme with Coverage Html
-        run: |
-          sed -i '/<!-- Pytest Coverage Comment:Begin -->/,/<!-- Pytest Coverage Comment:End -->/c\<!-- Pytest Coverage Comment:Begin -->\n\${{ steps.coverageComment.outputs.coverageHtml }}\n${{ steps.coverageComment.outputs.summaryReport }}\n<!-- Pytest Coverage Comment:End -->' ./README.md
-
-  dependency-review:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Checkout Repository'
-        uses: actions/checkout@v3
-      - name: 'Dependency Review'
-        uses: actions/dependency-review-action@v2
 

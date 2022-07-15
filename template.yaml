@@ -25,18 +25,16 @@ Resources:
 
   DeadLetterStandardQueue: 
     Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
     Properties: 
       QueueName: !Sub deadLetterQueue-${Env}
       MessageRetentionPeriod: 1209600 
       Tags:
           - Key: "env"
             Value: !Ref Env
-      KmsMasterKeyId:
-        Fn::GetAtt:
-          - TestKey
-          - KeyId
-  DeadLetterFifoQueue: 
+  DeadLetterFifoQueue:
     Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
     Properties: 
       QueueName: !Sub "deadLetterQueue${Env}.fifo"
       FifoQueue: true
@@ -44,14 +42,10 @@ Resources:
       Tags:
           - Key: "env"
             Value: !Ref Env
-      KmsMasterKeyId:
-        Fn::GetAtt:
-          - TestKey
-          - KeyId
 
   AsyncQueue:
     Type: AWS::SQS::Queue
-    DeletionPolicy: Delete #Retain
+    DeletionPolicy: Delete 
     Properties:
       QueueName: !Sub inference-${Env}
       RedrivePolicy: 
@@ -61,13 +55,10 @@ Resources:
       Tags:
         - Key: "env"
           Value: !Ref Env
-      KmsMasterKeyId:
-        Fn::GetAtt:
-          - TestKey
-          - KeyId
 
   FifoQueue:
     Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
     Properties:
       QueueName: !Sub "inference_${Env}.fifo"
       FifoQueue: true
@@ -77,10 +68,6 @@ Resources:
       Tags:
         - Key: "env"
           Value: !Ref Env
-      KmsMasterKeyId:
-        Fn::GetAtt:
-          - TestKey
-          - KeyId
 
   ModelFunction:
     Type: AWS::Serverless::Function
@@ -155,12 +142,9 @@ Resources:
     Type: AWS::SNS::Topic
     Properties:
       Subscription:
-        - Endpoint: "add valid email address"
+        - Endpoint: "innaki.gorostiaga@gmail.com"
           Protocol: email
-      KmsMasterKeyId:
-        Fn::GetAtt:
-          - TestKey
-          - KeyId
+
 Outputs:  
   DeadLetterQueue:
     Description: DeadLetterStandardQueue

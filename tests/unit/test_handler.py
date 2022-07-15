@@ -1,8 +1,7 @@
 import pytest
-import json
 import os
-os.environ["Env"] = "dev"
 from function  import inference
+#import json
 
 
 #@pytest.fixture()
