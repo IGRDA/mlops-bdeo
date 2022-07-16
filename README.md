@@ -15,8 +15,8 @@ If you want to explain any aspect of your code/implementation please feel free a
 Mandatory Requirements:
 
 1. Containerization (Docker, LXC...) (Docker,ECR (Elastic Container Registry) )
-2. Unit Tests  (tests(unit/* , ci/cd pipelines using GitHub actions))
-2. CI/CD (GitLab, GitHub, Jenkins, Travis...) (GitHubg, GitHub-actions, sonarcloud)
+2. Unit Tests  (tests/unit/* , ci/cd pipelines using GitHub actions)
+2. CI/CD (GitLab, GitHub, Jenkins, Travis...) (GitHub, GitHub-actions, SonarCloud)
 3. IaC (CDK, Terraform, Ansible...) (Cloudformation)
 4. Documentation (At least in functional/productive code)
 
