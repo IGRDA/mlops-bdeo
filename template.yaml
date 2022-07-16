@@ -101,7 +101,7 @@ Resources:
               Effect: Allow
               Action:
                 - dynamodb:*
-              Resource: "*"
+              Resource: !GetAtt resultsTable.Arn
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: function/
