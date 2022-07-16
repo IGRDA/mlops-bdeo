@@ -29,7 +29,7 @@ Resources:
 
   DeadLetterStandardQueue: 
     Type: AWS::SQS::Queue
-    DeletionPolicy: Delete
+    DeletionPolicy: Retain
     Properties: 
       QueueName: !Sub deadLetterQueue-${Env}
       MessageRetentionPeriod: 1209600 
@@ -38,7 +38,7 @@ Resources:
             Value: !Ref Env
   DeadLetterFifoQueue:
     Type: AWS::SQS::Queue
-    DeletionPolicy: Delete
+    DeletionPolicy: Retain
     Properties: 
       QueueName: !Sub "deadLetterQueue${Env}.fifo"
       FifoQueue: true
@@ -49,7 +49,7 @@ Resources:
 
   AsyncQueue:
     Type: AWS::SQS::Queue
-    DeletionPolicy: Delete 
+    DeletionPolicy: Retain 
     Properties:
       QueueName: !Sub inference-${Env}
       RedrivePolicy: 
@@ -62,7 +62,7 @@ Resources:
 
   FifoQueue:
     Type: AWS::SQS::Queue
-    DeletionPolicy: Delete
+    DeletionPolicy: Retain
     Properties:
       QueueName: !Sub "inference_${Env}.fifo"
       FifoQueue: true
@@ -109,7 +109,7 @@ Resources:
 
   resultsTable:
     Type: AWS::DynamoDB::Table
-    DeletionPolicy: Delete 
+    DeletionPolicy: Retain 
     Properties:
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
@@ -186,9 +186,7 @@ Resources:
         Type: "AWS::CloudWatch::Dashboard"
         Properties:
             DashboardName: !Ref DashboardName
-            DashboardBody: 
-            type: object
-            example: |
+            DashboardBody: |
               {
                   "widgets": [
                       {
