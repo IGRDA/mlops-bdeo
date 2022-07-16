@@ -19,7 +19,7 @@ def lambda_handler(event, context):
     result = ts(sample_tensor)
     print(round(uuid.uuid4().int, 10))
     response = table.put_item(
-                Item={"id": int(str(uuid.uuid4().int)[:10]),
+                Item={"id": int(str(uuid.uuid4().int)[:-1]),
                     "result": str(result.tolist())}
                 )
     print(result)  # <- tensor([2, 4, 6, 8])
