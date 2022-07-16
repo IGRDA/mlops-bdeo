@@ -34,7 +34,7 @@ jobs:
       # Test
       - name: Test with pytest
         run: |
-          pytest tests/unit/test_handler.py --cov=./ --cov-report=xml --doctest-modules
+          pytest tests/unit/test_handler.py --doctest-modules --junitxml=junit/test-results.xml --cov=coverage.txt --cov-report=term-missing:skip-covered
 
 
       # Sonar Qube
