@@ -35,8 +35,9 @@ jobs:
       # Test
       - name: Test with pytest
         run: |
-          pytest tests/unit/test_handler.py --doctest-modules  --cov-report xml:coverage.xml --junitxml=junit/test-results.xml 
-          echo "$(ls)"
+          pytest tests/unit/test_handler.py --doctest-modules  --cov=./ --junitxml=junit/test-results.xml  --cov-report term --cov-report xml:coverage.xml 
+      - name: debug
+        run: echo "$(ls)"
 
       # Sonar Qube
       - name: SonarCloud Scan
