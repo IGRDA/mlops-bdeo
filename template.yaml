@@ -16,7 +16,8 @@ Parameters:
 
   DashboardName:
     Description: "The CloudWatch dashboard name."
-    Type: "String"
+    Type: String
+    Default: BdeoDashboard
 Globals:
   Function:
     Timeout: 30
@@ -28,7 +29,7 @@ Resources:
 
   DeadLetterStandardQueue: 
     Type: AWS::SQS::Queue
-    DeletionPolicy: Delete
+    DeletionPolicy: Retain
     Properties: 
       QueueName: !Sub deadLetterQueue-${Env}
       MessageRetentionPeriod: 1209600 
@@ -37,7 +38,7 @@ Resources:
             Value: !Ref Env
   DeadLetterFifoQueue:
     Type: AWS::SQS::Queue
-    DeletionPolicy: Delete
+    DeletionPolicy: Retain
     Properties: 
       QueueName: !Sub "deadLetterQueue${Env}.fifo"
       FifoQueue: true
@@ -48,7 +49,7 @@ Resources:
 
   AsyncQueue:
     Type: AWS::SQS::Queue
-    DeletionPolicy: Delete 
+    DeletionPolicy: Retain 
     Properties:
       QueueName: !Sub inference-${Env}
       RedrivePolicy: 
@@ -61,7 +62,7 @@ Resources:
 
   FifoQueue:
     Type: AWS::SQS::Queue
-    DeletionPolicy: Delete
+    DeletionPolicy: Retain
     Properties:
       QueueName: !Sub "inference_${Env}.fifo"
       FifoQueue: true
@@ -108,7 +109,7 @@ Resources:
 
   resultsTable:
     Type: AWS::DynamoDB::Table
-    DeletionPolicy: Delete 
+    DeletionPolicy: Retain 
     Properties:
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
@@ -185,8 +186,60 @@ Resources:
         Type: "AWS::CloudWatch::Dashboard"
         Properties:
             DashboardName: !Ref DashboardName
-            DashboardBody: !Sub |
-                DASHBOARD_BODY
+            DashboardBody: |
+              {
+                  "widgets": [
+                      {
+                          "type": "explorer",
+                          "x": 0,
+                          "y": 0,
+                          "width": 24,
+                          "height": 15,
+                          "properties": {
+                              "metrics": [
+                                  {
+                                      "metricName": "Invocations",
+                                      "resourceType": "AWS::Lambda::Function",
+                                      "stat": "Sum"
+                                  },
+                                  {
+                                      "metricName": "Duration",
+                                      "resourceType": "AWS::Lambda::Function",
+                                      "stat": "Average"
+                                  },
+                                  {
+                                      "metricName": "Errors",
+                                      "resourceType": "AWS::Lambda::Function",
+                                      "stat": "Sum"
+                                  },
+                                  {
+                                      "metricName": "Throttles",
+                                      "resourceType": "AWS::Lambda::Function",
+                                      "stat": "Sum"
+                                  }
+                              ],
+                              "labels": [
+                                  {
+                                      "key": "FunctionName",
+                                      "value": "inferencceFunction-dev"
+                                  }
+                              ],
+                              "widgetOptions": {
+                                  "legend": {
+                                      "position": "bottom"
+                                  },
+                                  "view": "timeSeries",
+                                  "stacked": false,
+                                  "rowsPerPage": 50,
+                                  "widgetsPerRow": 2
+                              },
+                              "period": 3600,
+                              "splitBy": "",
+                              "region": "eu-west-3"
+                          }
+                      }
+                  ]
+              }
 Outputs:
   Dashboard:
     Description: "Dashboard created to monitor Lambda function"

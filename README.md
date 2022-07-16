@@ -43,3 +43,8 @@ Limpiar codigo y repo
 quitar acount id
 solve signed commits
 
+Create custom metrics to new alarms
+Create mixed metrics
+Seccurity issues (Rols)
+Externalize variables
+Clean code

@@ -1,0 +1,40 @@
+on:
+  push:
+    branches:
+      - dev
+      - test
+      - master
+jobs:
+  coverage:
+    runs-on:
+      - ubuntu-latest
+
+    steps:
+      # Checkout repo
+      - uses: actions/checkout@v2
+
+      # Dependencies
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: Install dependenciess
+        run: |
+          python3 -m pip install pytest
+          python3 -m pip install flake8
+          python3 -m pip install -r ./function/requirements.txt
+          python3 -m pip install pytest-cov
+
+      # Test
+      - name: Test with pytest
+        run: |
+          pytest tests/unit/test_handler.py --cov=./ --cov-report=xml --doctest-modules
+
+      # Sonar Qube
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
