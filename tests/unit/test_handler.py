@@ -1,13 +1,13 @@
 import pytest
-import os
 from function  import inference
-#import json
+import json
 
 
-#@pytest.fixture()
-def test_lambda_handler():
-    ret = inference.lambda_handler("","")
-    #data = json.loads()
-    #assert ret["statusCode"] == 200
-    #assert "message" in ret["body"]
-    #assert data["message"] == "hello world"
+@pytest.mark.parametrize(
+    "test_input,expected", 
+    [(json.load(open('events/event0.json')),  [0,0,0,0,0]),
+     (json.load(open('events/event1.json')),  [2,2,2,2,2]), 
+     (json.load(open('events/event.json')),   [2,4,6,8,10])])
+def test_lambda_handler(test_input, expected):
+    assert  inference.lambda_handler(test_input,"") == expected
+

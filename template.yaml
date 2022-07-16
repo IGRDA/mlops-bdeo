@@ -14,10 +14,6 @@ Parameters:
       - prod
     Default: dev
 
-  DashboardName:
-    Description: "The CloudWatch dashboard name."
-    Type: String
-    Default: BdeoDashboard
 Globals:
   Function:
     Timeout: 30
@@ -126,6 +122,7 @@ Resources:
   InvocationAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
+      AlarmName: !Sub invocationAlarm-${Env}
       AlarmDescription: Invocation alarm for my AWS Lambda
       AlarmActions:
         - !Ref AlarmSNSTopic
@@ -143,6 +140,7 @@ Resources:
   BillingAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
+      AlarmName: !Sub billingAlarm-${Env}
       AlarmDescription: Billing alarm for my AWS Lambda
       AlarmActions:
         - !Ref AlarmSNSTopic
@@ -160,6 +158,7 @@ Resources:
   ErrorAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
+      AlarmName: !Sub errorAlarm-${Env}
       AlarmDescription: Billing alarm for my AWS Lambda
       AlarmActions:
         - !Ref AlarmSNSTopic
@@ -185,7 +184,7 @@ Resources:
   Dashboard:
         Type: "AWS::CloudWatch::Dashboard"
         Properties:
-            DashboardName: !Ref DashboardName
+            DashboardName: !Sub BdeoDashboard-${Env}
             DashboardBody: |
               {
                   "widgets": [
@@ -244,7 +243,7 @@ Outputs:
   Dashboard:
     Description: "Dashboard created to monitor Lambda function"
     Value: !Sub |
-       "https://${AWS::Region}.console.aws.amazon.com/cloudwatch/home#dashboards:name=${DashboardName}"
+       "https://${AWS::Region}.console.aws.amazon.com/cloudwatch/home#dashboards:name=BdeoDashboard-${Env}"
   DeadLetterQueue:
     Description: DeadLetterStandardQueue
     Value: !Ref DeadLetterStandardQueue
