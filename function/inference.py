@@ -13,13 +13,15 @@ ts = torch.jit.load('function/doubleit_model.pt')
 
 
 def lambda_handler(event, context):
-    print(event)
+    
     # Example or inference. This model returns a 1-dim tensor multiplied by 2
-    sample_tensor = torch.tensor([1, 2, 3, 4])
-    result = ts(sample_tensor)
-    print(round(uuid.uuid4().int, 10))
-    response = table.put_item(
-                Item={"id": int(str(uuid.uuid4().int)[:-1]),
-                    "result": str(result.tolist())}
-                )
-    print(result)  # <- tensor([2, 4, 6, 8])
+    sample_tensor = torch.tensor(eval(event["Records"][0]["body"]))
+
+    result = ts(sample_tensor) # <- tensor([2, 4, 6, 8])
+
+    table.put_item(
+                     Item={"id": int(str(uuid.uuid4().int)[:-1]),
+                           "result": str(result.tolist())}
+                   )
+
+    return result.tolist()
