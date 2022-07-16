@@ -12,4 +12,11 @@ def test_lambda_handler():
     #assert "message" in ret["body"]
     #assert data["message"] == "hello world"
 
+@pytest.mark.parametrize(
+    "test_input,expected", 
+    [("3+5", 8),
+     ("2+4", 6), 
+     ("6*9", 42)])
+def test_lambda_handler(test_input, expected):
+    assert eval(test_input) == expected
 
