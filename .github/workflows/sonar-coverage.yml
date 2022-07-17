@@ -4,7 +4,7 @@ on:
     branches:
       - dev
       - test
-      - master
+      - main
 jobs:
   coverage:
     runs-on:
