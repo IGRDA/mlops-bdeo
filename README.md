@@ -14,37 +14,36 @@ If you want to explain any aspect of your code/implementation please feel free a
 
 Mandatory Requirements:
 
-1. Containerization (Docker, LXC...) (Docker,ECR (Elastic Container Registry) )
-2. Unit Tests  (tests/unit/* , ci/cd pipelines using GitHub actions)
-2. CI/CD (GitLab, GitHub, Jenkins, Travis...) (GitHub, GitHub-actions, SonarCloud)
-3. IaC (CDK, Terraform, Ansible...) (Cloudformation)
+1. Containerization (Docker, LXC...) **(Docker,ECR (Elastic Container Registry) )**
+2. Unit Tests **(tests/unit/* , ci/cd pipelines using GitHub actions)**
+2. CI/CD (GitLab, GitHub, Jenkins, Travis...) **(GitHub, GitHub-actions, SonarCloud)**
+3. IaC (CDK, Terraform, Ansible...) **(Cloudformation)**
 4. Documentation (At least in functional/productive code)
 
 Optional requirements:
 
-- If you want, you can use python package managers such as pipenv, poetry or virtualenv (docker and usual requirements.txt)
-- Suppose that the model inference call comes from backend, so you can choose either synchronous or asynchronoun communication (fifo and async queues)
-- You can use a sentry-like application monitoring (Alarms in AWS Cloudwatch...) (Cloudwatch metrics and dashboards)
-- Persistent data is optional, if you want to save the model events/results in a database (dynamo table)
+- If you want, you can use python package managers such as pipenv, poetry or virtualenv **(docker and usual requirements.txt)**
+- Suppose that the model inference call comes from backend, so you can choose either synchronous or asynchronoun communication **(fifo and async queues)**
+- You can use a sentry-like application monitoring (Alarms in AWS Cloudwatch...) **(Cloudwatch metrics and dashboards)**
+- Persistent data is optional, if you want to save the model events/results in a database **(dynamo table)**
 
 
+
+### TO DO:
 
 CLOUDWATCH METRICS AND DASHBOARDS
 Add dvc (data version control), mlflow (reproducibilty) tensorflow exended data drift concept drift, tensorboard, explainability, model dashboard againts control grous
 Ab testing
 Block pushes to repo
 Integration tests con mocks
-Externalizar bucket, cuenta
+Externalizar bucket, acount id
 
-Mejorar pytest y añadir distintos casos
-Cloudwatch dashboard
 
 Limpiar codigo y repo
-quitar acount id
-solve signed commits
 
 Create custom metrics to new alarms
 Create mixed metrics
 Seccurity issues (Rols)
 Externalize variables
 Clean code
+IAM role
