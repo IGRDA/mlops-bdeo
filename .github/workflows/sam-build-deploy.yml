@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Build & deploy
 on:
   pull_request:
     types:
@@ -7,7 +7,6 @@ jobs:
   build-deploy:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    #needs: unit-tests
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -18,9 +17,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-3
       # sam build 
+      - run: echo "🖥️ building..."
       - run: sam build --use-container
 
-      # Run Unit tests- Specify unit tests here 
+      # Run Unit tests- Specify unit tests here
+      - run: echo "👌🏼 SAM unit tests"
+      - run: sam local invoke ModelFunction -e events/event.json
 
       # sam deploy
-      - run: sam deploy --config-env dev --no-confirm-changeset --no-fail-on-empty-changeset 
+      - run: echo "🚀 ✅  deploying..."
+      - run: sam deploy --config-env ${{ github.ref }} --no-confirm-changeset --no-fail-on-empty-changeset 
