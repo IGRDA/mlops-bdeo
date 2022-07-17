@@ -16,7 +16,7 @@ Mandatory Requirements:
 
 1. Containerization (Docker, LXC...) **(Docker,ECR (Elastic Container Registry) )**
 2. Unit Tests **(tests/unit/* , ci/cd pipelines using GitHub actions)**
-2. CI/CD (GitLab, GitHub, Jenkins, Travis...) **(GitHub, GitHub-actions, SonarCloud)**
+2. CI/CD (GitLab, GitHub, Jenkins, Travis...) **(GitHub, GitHub-actions, SonarCloud, Gitflow)**
 3. IaC (CDK, Terraform, Ansible...) **(Cloudformation)**
 4. Documentation (At least in functional/productive code)
 
@@ -31,19 +31,42 @@ Optional requirements:
 
 ### TO DO:
 
-CLOUDWATCH METRICS AND DASHBOARDS
-Add dvc (data version control), mlflow (reproducibilty) tensorflow exended data drift concept drift, tensorboard, explainability, model dashboard againts control grous
-Ab testing
-Block pushes to repo
-Integration tests con mocks
-Externalizar bucket, acount id
+ - General code cleaning
+ - Create Mock classes for unit testing external dependencies (example: dynamo).
+ - Create IAM Role for the application and developers group with only the permissions needed (Now deploy are made with AWS admin privileges)
+ - Add workflow management if application flow gets more complex (Step Functions, Airflow...)
+ - Review alarms and subscribe developers chat (slack, teams) to SNS
+ - Add PR messages to developers chat
+ - Apply MlOps techniques to the repo that generates the model (doubleit_model.pt):
+     - Add data version controlo (DVC)
+     - Experiment tracking and visualization (MLflow, TensorBoard)
+     - Data drift and concept drift alarms (TensorFlow Extended)
+     - Model explainability (SHAP, LIME)
+     - Model dashboard for performance monitoring against control group (QuickSight)
+     - Model AB testing (canary, blue-green)
+ - ...
+ 
 
 
-Limpiar codigo y repo
+### Repo structure
 
-Create custom metrics to new alarms
-Create mixed metrics
-Seccurity issues (Rols)
-Externalize variables
-Clean code
-IAM role
+├── events
+│   ├── event0.json
+│   ├── event1.json
+│   └── event.json
+├── function
+│   ├── Dockerfile
+│   ├── doubleit_model.pt
+│   ├── inference.py
+│   ├── __init__.py
+│   └── requirements.txt
+├── __init__.py
+├── README.md
+├── samconfig.toml
+├── sonar-project.properties
+├── template.yaml
+└── tests
+    ├── __init__.py
+    └── unit
+        ├── __init__.py
+        └── test_handler.py
