@@ -16,6 +16,18 @@ parameter_overrides = [
 ]
 
 
+[test]
+[test.deploy]
+[test.deploy.parameters]
+stack_name = "MlOpsBdeo-test"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-91g495dkoya3"
+s3_prefix = "MlOpsBdeo-test"
+region = "eu-west-3"
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+parameter_overrides = "Env=\"test\""
+image_repositories = ["ModelFunction=511901827322.dkr.ecr.eu-west-3.amazonaws.com/mlopsbdeotest747f2b0e/modelfunction645e79derepo"]
+
 
 
 
