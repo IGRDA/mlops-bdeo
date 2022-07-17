@@ -50,6 +50,7 @@ Optional requirements:
 
 ### Repo structure
 
+```
 ├── events
 │   ├── event0.json
 │   ├── event1.json
@@ -70,3 +71,4 @@ Optional requirements:
     └── unit
         ├── __init__.py
         └── test_handler.py
+```
