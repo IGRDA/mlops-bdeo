@@ -36,17 +36,14 @@ Add dvc (data version control), mlflow (reproducibilty) tensorflow exended data 
 Ab testing
 Block pushes to repo
 Integration tests con mocks
-Externalizar bucket, cuenta
+Externalizar bucket, acount id
 
-Mejorar pytest y añadir distintos casos
-Cloudwatch dashboard
 
 Limpiar codigo y repo
-quitar acount id
-solve signed commits
 
 Create custom metrics to new alarms
 Create mixed metrics
 Seccurity issues (Rols)
 Externalize variables
 Clean code
+IAM role
