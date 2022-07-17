@@ -24,7 +24,8 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.7
-
+      
+      - run: echo "🖥️ Installing dependencies."
       - name: Install dependenciess
         run: |
           python3 -m pip install pytest
@@ -35,9 +36,9 @@ jobs:
       # Test
       - name: Test with pytest
         run: |
-          pytest tests/unit/test_handler.py --doctest-modules  --cov-report xml:coverage.xml --junitxml=junit/test-results.xml 
+          pytest tests/unit/test_handler.py --doctest-modules  --cov=./ --junitxml=junit/test-results.xml  --cov-report term --cov-report xml:coverage.xml 
 
-
+      - run: echo "👌🏼 Unit tests done."
       # Sonar Qube
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
