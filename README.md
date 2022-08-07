@@ -32,7 +32,7 @@ Optional requirements:
 ### TO DO:
 
  - General code cleaning
- - Create Mock classes for unit testing external dependencies (example: dynamo).
+ - Create Mock classes for integration testing external dependencies (example: dynamo).
  - Create IAM Role for the application and developers group with only the permissions needed (Now deploy are made with AWS admin privileges)
  - Add workflow management if application flow gets more complex (Step Functions, Airflow...)
  - Review alarms and subscribe developers chat (slack, teams) to SNS
